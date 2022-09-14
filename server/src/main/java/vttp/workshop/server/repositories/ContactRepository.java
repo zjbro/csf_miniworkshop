@@ -45,7 +45,8 @@ public class ContactRepository {
 		
 		for (int i = 0; i < contactIds.size(); i++){
 			System.out.println(">>>>>>>Size of contact Id list: " + contactIds.size());
-			System.out.println(">>>>>>>contact from redis: "+ redisTemplate.opsForHash().get(contactIds.get(i), "address").toString());
+			// System.out.println(">>>>>>>contact from redis: "+ redisTemplate.opsForHash().get(contactIds.get(i), "address").toString());
+			
 			arrayBuilder.add(redisTemplate.opsForHash().get(contactIds.get(i), "address").toString());
 		}
 		

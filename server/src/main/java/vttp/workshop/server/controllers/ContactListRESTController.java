@@ -72,6 +72,7 @@ public class ContactListRESTController {
             resp = new Response();
             resp.setCode(400);
             resp.setMessage(ex.getMessage());
+            ex.printStackTrace();;
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(resp.toJson().toString());

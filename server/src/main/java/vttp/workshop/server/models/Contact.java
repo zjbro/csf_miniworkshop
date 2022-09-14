@@ -1,12 +1,13 @@
 package vttp.workshop.server.models;
 
+import java.io.Serializable;
 import java.io.StringReader;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
-public class Contact {
+public class Contact implements Serializable{
     private String contactId;
     private String name;
     private String email;
