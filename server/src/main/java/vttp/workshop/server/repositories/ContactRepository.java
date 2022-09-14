@@ -20,7 +20,7 @@ public class ContactRepository {
 
 	@Autowired
 	@Qualifier("games")
-	private RedisTemplate<String, String> redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 
 	
 

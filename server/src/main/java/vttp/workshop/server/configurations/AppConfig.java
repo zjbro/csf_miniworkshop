@@ -43,7 +43,7 @@ public class AppConfig {
 
 
 	@Bean(name="games")
-	public RedisTemplate<String, String> createRedis() {
+	public RedisTemplate<String, Object> createRedis() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
 		config.setHostName(redisHost);
 		config.setPort(redisPort);
@@ -54,7 +54,7 @@ public class AppConfig {
 		JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisConfig);
 		jedisFac.afterPropertiesSet();
 
-		RedisTemplate<String, String> template = new RedisTemplate<>();
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(jedisFac);
 
 		template.setKeySerializer(new StringRedisSerializer());
