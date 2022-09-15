@@ -1,5 +1,6 @@
 package vttp.workshop.server.repositories;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import vttp.workshop.server.models.Contact;
 
 @Repository
@@ -22,7 +24,9 @@ public class ContactRepository {
 	@Qualifier("games")
 	private RedisTemplate<String, Object> redisTemplate;
 
-	
+	public void delete(String contactId) {
+		redisTemplate.opsForHash().delete(contactId, "address");
+	}
 
 	public void save(Contact contact) {
 		String cId = contact.getContactId();
@@ -46,8 +50,12 @@ public class ContactRepository {
 		for (int i = 0; i < contactIds.size(); i++){
 			System.out.println(">>>>>>>Size of contact Id list: " + contactIds.size());
 			// System.out.println(">>>>>>>contact from redis: "+ redisTemplate.opsForHash().get(contactIds.get(i), "address").toString());
+			String jsonObjectStr = redisTemplate.opsForHash().get(contactIds.get(i), "address").toString().toString();
+			JsonReader jsonReader = Json.createReader(new StringReader(jsonObjectStr));
+			JsonObject object = jsonReader.readObject();
+			jsonReader.close();
 			
-			arrayBuilder.add(redisTemplate.opsForHash().get(contactIds.get(i), "address").toString());
+			arrayBuilder.add(object);
 		}
 		
 

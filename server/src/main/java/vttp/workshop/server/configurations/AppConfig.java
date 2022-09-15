@@ -38,8 +38,8 @@ public class AppConfig {
 	// @Value("${spring.redis.database}")
 	// private Integer redisDatabase;
 
-	// @Value("${spring.redis.password}")
-	// private String redisPassword;
+	@Value("${spring.redis.password}")
+	private String redisPassword;
 
 
 	@Bean(name="games")
@@ -48,7 +48,7 @@ public class AppConfig {
 		config.setHostName(redisHost);
 		config.setPort(redisPort);
 		// config.setDatabase(redisDatabase);
-		// config.setPassword(redisPassword);
+		config.setPassword(redisPassword);
 
 		JedisClientConfiguration jedisConfig = JedisClientConfiguration.builder().build();
 		JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisConfig);
